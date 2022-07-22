@@ -2,6 +2,7 @@ import Reel from './pages/Reel';
 import Landing from './pages/Landing';
 
 
+
 function App() {
   
   return (
@@ -9,6 +10,8 @@ function App() {
    
         <Landing />
         <Reel />
+
+        
       
 
     </div>

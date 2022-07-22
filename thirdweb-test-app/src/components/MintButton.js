@@ -1,12 +1,15 @@
-import { useNFTDrop, useClaimNFT,} from '@thirdweb-dev/react'
-import MintBtn from "../images/Mint Btn.png"
+import { useNFTDrop, useClaimNFT, useAddress} from '@thirdweb-dev/react'
+
+import MintBtnPop from '../images/MintBtnPop.png'
 
 
-export default function MintButton() {
-  const nftDrop = useNFTDrop("0x21f489637912f7BdEd53707686a520B7E7645f2A")
-
+export default function MintButton(props) {
+  const nftDrop = useNFTDrop("0x305066fDb2F7c9D5Aa75cC1A625d6b21c838e544")
+  const address = useAddress();
   // Now you can use the nft drop contract in the rest of the component
   
+ 
+
     const {
       mutate: claimNft,
       isLoading,
@@ -15,15 +18,23 @@ export default function MintButton() {
   
     if (error) {
       console.error("failed to claim nft", error);
+    } 
+
+    if (isLoading) {
+      //console.log('loading')
+      props.passData(isLoading)
+     
     }
-  
+    
+   
+
     return (
       <img disabled={isLoading}
-           onClick={() => claimNft({to: "0xb14969b2eCA9733150fFF0C2e9b45844A25e371F", quantity: 1})}
-           src={MintBtn}
+           onClick={() => claimNft({to: address, quantity: props.inputNum})}
+           src={MintBtnPop}
+           className="w-[170px] active:opacity-75 hover:scale-105 transition cursor-pointer "
            > 
       </img>
     );
   
 }
-
